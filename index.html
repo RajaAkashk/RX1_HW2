@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RX1_HW2</title>
+  </head>
+  <body>
+    <h1>Add Profile</h1>
+    <form id="addProfileForm">
+      <input type="number" placeholder="ID" id="userId" required />
+      <input type="text" placeholder="Name" id="userName" required />
+      <input type="number" placeholder="Age" id="userAge" required />
+      <button type="submit">Add Profile</button>
+    </form>
+    <h1>Remove Profile</h1>
+    <form id="removeProfileForm">
+      <input type="text" placeholder="ID" id="removeProfileId" /><button
+        type="submit"
+      >
+        Remove Profile
+      </button>
+    </form>
+    <div>
+      <ul id="result"></ul>
+    </div>
+    <script type="module" src="src/script.js"></script>
+  </body>
+</html>

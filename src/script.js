@@ -1,9 +1,13 @@
 import { createStore } from "redux";
 import profileReducer from "./profileReducer";
+import {
+  addProfileAction,
+  removeProfileAction,
+  avergeAgeAction,
+} from "./action";
 
 const store = createStore(profileReducer);
 store.subscribe(() => {
-  console.log("subscribed.");
   updateUser();
 });
 
@@ -22,9 +26,8 @@ addProfileForm.addEventListener("submit", (event) => {
     age: userAge,
   };
   if (user) {
-    console.log(user);
-    store.dispatch({ type: "ADD_PROFILE", payload: user });
-    store.dispatch({ type: "CALCULATE_AVERAGE_AGE" });
+    store.dispatch(addProfileAction(user));
+    store.dispatch(avergeAgeAction());
   }
 
   addProfileForm.reset();
@@ -34,15 +37,14 @@ const removeProfileForm = document.querySelector("#removeProfileForm");
 removeProfileForm.addEventListener("submit", (event) => {
   event.preventDefault();
   const removeProfileId = document.querySelector("#removeProfileId").value;
-  store.dispatch({ type: "REMOVE_PROFILE", payload: removeProfileId });
-  store.dispatch({ type: "CALCULATE_AVERAGE_AGE" });
+  store.dispatch(removeProfileAction(removeProfileId));
+  store.dispatch(avergeAgeAction());
   removeProfileForm.reset();
 });
 
 const updateUser = () => {
   const result = document.querySelector("#result");
   const state = store.getState();
-  console.log(state);
 
   const userListHTML = state.userList
     .map((user) => `<li>${user.id}. ${user.name} (${user.age} years old)</li>`)
